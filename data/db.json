@@ -1,5 +1,20 @@
 {
-    "records": [],
-    "users": [],
-    "orders": []
+  "records": [
+    {
+      "title": "Sports",
+      "artist": "Viagra Boys",
+      "price": 2.99,
+      "year": 2019,
+      "id": "1572536287264"
+    },
+    {
+      "title": "Sports",
+      "artist": "Viagra Boys",
+      "price": 2.99,
+      "year": 2019,
+      "id": "1572537507201"
+    }
+  ],
+  "users": [],
+  "orders": []
 }

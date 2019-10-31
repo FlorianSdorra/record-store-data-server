@@ -40,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /** ROUTES */
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/records', recordsRouter);
 
 /** EXPORT PATH */
 module.exports = app;
