@@ -10,11 +10,12 @@ const FileSync = require('lowdb/adapters/FileSync');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const recordsRouter = require('./routes/records');
+const ordersRouter = require('./routes/orders');
 
-/** INIT */
+/** INIT THE SERVER */
 const app = express();
 
-/** LOGGING */
+/** LOGS */
 app.use(logger('dev'));
 
 /** SET UP LOWDB */
@@ -26,7 +27,6 @@ db.defaults({
     orders: []
 }).write();
 
-
 /** REQUEST PARSERS */
 app.use(express.json());
 app.use(express.urlencoded({
@@ -34,13 +34,13 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 
-/** STATIC FILES*/
+/** STATIC FILES */
 app.use(express.static(path.join(__dirname, 'public')));
 
 /** ROUTES */
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/records', recordsRouter);
+app.use('/orders', ordersRouter);
 
-/** EXPORT PATH */
 module.exports = app;

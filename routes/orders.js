@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const {
-  getUsers,
-  addUser
-} = require('../controllers/usersController');
+    getOrders,
+    addOrder
+} = require('../controllers/ordersController');
 
 /** GET all the records */
-router.get('/', getUsers);
+router.get('/', getOrders);
 
 /** POST a new record */
-router.post('/', addUser);
+router.post('/', addOrder);
 
 module.exports = router;
