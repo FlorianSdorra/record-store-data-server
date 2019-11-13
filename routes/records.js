@@ -3,21 +3,29 @@ const router = express.Router();
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('data/db.json');
-const db = low(adapter);
+
 const {
     getRecords,
-    addRecord
+    addRecord,
+    getRecord,
+    deleteRecord,
+    updateRecord
 } = require('../controllers/recordsController');
 
 
-/**
- * GET all records
- */
-router.get('/', getRecords);
+/*** GET */
+router
+    .route('/')
+    .get(getRecords)
+    .post(addRecord);
 
 /**
- * POST a record
+ * POST 
  */
-router.post('/', addRecord);
+router
+    .route('/:id')
+    .get(getRecord)
+    .delete(deleteRecord)
+    .put(updateRecord);
 
 module.exports = router;
