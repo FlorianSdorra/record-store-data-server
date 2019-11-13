@@ -12,7 +12,12 @@ const usersRouter = require('./routes/users');
 const recordsRouter = require('./routes/records');
 const ordersRouter = require('./routes/orders');
 
-/** INIT THE SERVER */
+/** OUR MIDDLEWARE */
+const {
+    setCors
+} = require('./middleware/security');
+
+/** INIT THE SERVER */ //
 const app = express();
 
 /** LOGS */
@@ -33,6 +38,7 @@ app.use(express.urlencoded({
     extended: false
 }));
 app.use(cookieParser());
+app.use(setCors);
 
 /** STATIC FILES */
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,5 +48,20 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/records', recordsRouter);
 app.use('/orders', ordersRouter);
+
+/** ERROR HANDLING */
+
+app.use(function (req, res, next) {
+    const err = new Error('Looks like something is broken...');
+    next(err);
+});
+
+app.use(function (err, req, res, next) {
+    res.status(400).send({
+        error: {
+            message: err.message
+        }
+    });
+});
 
 module.exports = app;

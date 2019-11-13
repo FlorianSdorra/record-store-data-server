@@ -15,7 +15,16 @@
       "id": "1572537507201"
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "firstName": "Rasta",
+      "lastName": "Man",
+      "email": "rasta@babylon.de",
+      "password": "019463820",
+      "birthday": "6/11/2000",
+      "id": "1573652874236"
+    }
+  ],
   "orders": [
     {
       "date": "11/11/2019",
