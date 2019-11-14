@@ -23,6 +23,31 @@
       "password": "019463820",
       "birthday": "6/11/2000",
       "id": "1573652874236"
+    },
+    {
+      "firstName": "Rasta",
+      "lastName": "Man",
+      "email": "rasta@babylon.de",
+      "password": "019463820",
+      "birthday": "6/11/2000",
+      "id": "1573722648881"
+    },
+    {
+      "firstName": "Rasta",
+      "lastName": "Man",
+      "email": "rasta@babylon.de",
+      "password": "019463820",
+      "birthday": "6/11/2000",
+      "id": "1573722651848"
+    },
+    {
+      "firstName": "Rasta",
+      "lastName": "Man",
+      "email": "rasta@babylon.de",
+      "password": "019463820",
+      "birthday": "6/11/2000",
+      "id": "1573722964116",
+      "middleName": "Bongripper"
     }
   ],
   "orders": [
