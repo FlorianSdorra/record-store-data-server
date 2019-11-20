@@ -14,9 +14,12 @@ const recordsRouter = require("./routes/records");
 const ordersRouter = require("./routes/orders");
 
 /** OUR MIDDLEWARE */
-const { setCors } = require("./middleware/security"); //
+const {
+  setCors
+} = require("./middleware/security"); //
 
-/** INIT THE SERVER */ const app = express();
+/** INIT THE SERVER */
+const app = express();
 
 /** LOGS */
 app.use(logger("dev"));
@@ -26,7 +29,8 @@ app.use(logger("dev"));
 mongoose.connect("mongodb://localhost:27017/record-store-data-server", {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 
 mongoose.connection.on(
@@ -68,12 +72,12 @@ app.use("/orders", ordersRouter);
 
 /** ERROR HANDLING */
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   const err = new Error("Looks like something is broken...");
   next(err);
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(400).send({
     error: {
       message: err.message

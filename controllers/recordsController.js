@@ -3,6 +3,10 @@ const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("data/db.json");
 const db = low(adapter);
 
+///////////////////////////////////////
+const Record = require('../models/Record');
+const createError = require('http-errors');
+
 exports.getRecords = (req, res, next) => {
   const records = db.get("records").value();
   res.status(200).send(records);
@@ -24,7 +28,9 @@ exports.addRecord = (req, res, next) => {
 ////////////////////////////////////////////////////
 
 exports.getRecord = (req, res, next) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
   const record = db
     .get("records")
     .find({
@@ -36,7 +42,9 @@ exports.getRecord = (req, res, next) => {
 };
 
 exports.deleteRecord = (req, res, next) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
   const record = db
     .get("record")
     .remove({
@@ -48,7 +56,9 @@ exports.deleteRecord = (req, res, next) => {
 };
 
 exports.updateRecord = (req, res, next) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
   const data = req.body;
 
   const record = db
