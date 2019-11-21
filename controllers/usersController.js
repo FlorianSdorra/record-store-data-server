@@ -1,11 +1,7 @@
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync("data/db.json");
-const db = low(adapter);
-
-//////////////////////////////////
 const User = require('../models/User');
 const createError = require('http-errors');
+
+//////////////////////////////////////////////////////////
 
 exports.getUsers = async (req, res, next) => {
     try {
