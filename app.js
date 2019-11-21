@@ -3,8 +3,6 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
 const mongoose = require("mongoose");
 
 /** ROUTERS */
@@ -14,9 +12,7 @@ const recordsRouter = require("./routes/records");
 const ordersRouter = require("./routes/orders");
 
 /** OUR MIDDLEWARE */
-const {
-  setCors
-} = require("./middleware/security"); //
+const { setCors } = require("./middleware/security"); //
 
 /** INIT THE SERVER */
 const app = express();
@@ -42,15 +38,6 @@ mongoose.connection.on("open", () => {
   console.log(`Connected to the database...`);
 });
 
-/** SET UP LOWDB */
-const adapter = new FileSync("data/db.json");
-const db = low(adapter);
-db.defaults({
-  records: [],
-  users: [],
-  orders: []
-}).write();
-
 /** REQUEST PARSERS */
 app.use(express.json());
 app.use(
@@ -72,12 +59,12 @@ app.use("/orders", ordersRouter);
 
 /** ERROR HANDLING */
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   const err = new Error("Looks like something is broken...");
   next(err);
 });
 
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   res.status(400).send({
     error: {
       message: err.message
