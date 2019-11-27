@@ -18,8 +18,8 @@ const OrderSchema = new Schema({
         default: new Date()
     },
     records: [{
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: 'Record'
     }]
 });
 

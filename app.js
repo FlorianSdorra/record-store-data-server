@@ -4,6 +4,9 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+// const {
+//   body
+// } = require('express-validator');
 
 /** ROUTERS */
 const indexRouter = require("./routes/index");
@@ -12,7 +15,9 @@ const recordsRouter = require("./routes/records");
 const ordersRouter = require("./routes/orders");
 
 /** OUR MIDDLEWARE */
-const { setCors } = require("./middleware/security"); //
+const {
+  setCors
+} = require("./middleware/security"); //
 
 /** INIT THE SERVER */
 const app = express();
@@ -51,20 +56,23 @@ app.use(setCors);
 /** STATIC FILES */
 app.use(express.static(path.join(__dirname, "public")));
 
+// VALIDATION 
+
+
 /** ROUTES */
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use('/users', usersRouter); //
 app.use("/records", recordsRouter);
 app.use("/orders", ordersRouter);
 
 /** ERROR HANDLING */
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   const err = new Error("Looks like something is broken...");
   next(err);
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(400).send({
     error: {
       message: err.message

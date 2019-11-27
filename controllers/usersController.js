@@ -1,41 +1,30 @@
 const User = require('../models/User');
 const createError = require('http-errors');
+const {
+    validationResult
+} = require('express-validator');
 
 //////////////////////////////////////////////////////////
-
 exports.getUsers = async (req, res, next) => {
     try {
-        const users = await User.find();
+        const users = await User.find()
+            .select('-password -__v')
+            .sort('lastName')
+            .limit(5);
         res.status(200).send(users);
     } catch (e) {
         next(e);
     }
 };
-
-exports.addUser = async (req, res, next) => {
-    try {
-        const user = new User(req.body);
-        await user.save();
-        res.status(200).send(user);
-    } catch (e) {
-        next(e);
-    }
-};
-
-
 exports.getUser = async (req, res, next) => {
     try {
-        const {
-            id
-        } = req.params;
-        const user = await User.findById(id);
+        const user = await User.findById(req.params.id);
         if (!user) throw new createError.NotFound();
         res.status(200).send(user);
     } catch (e) {
         next(e);
     }
 };
-
 exports.deleteUser = async (req, res, next) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
@@ -45,13 +34,23 @@ exports.deleteUser = async (req, res, next) => {
         next(e);
     }
 };
-
 exports.updateUser = async (req, res, next) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {
             new: true
         });
         if (!user) throw new createError.NotFound();
+        res.status(200).send(user);
+    } catch (e) {
+        next(e);
+    }
+};
+
+exports.addUser = async (req, res, next) => {
+    try {
+
+        const user = new User(req.body);
+        await user.save();
         res.status(200).send(user);
     } catch (e) {
         next(e);
