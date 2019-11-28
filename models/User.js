@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const {
     Schema
 } = mongoose;
+const Address = require('./Address');
 
 const UserSchema = new Schema({
     firstName: {
@@ -26,6 +27,11 @@ const UserSchema = new Schema({
     },
     userName: {
         type: String,
+        required: true
+    },
+
+    address: {
+        type: Address,
         required: true
     }
 });
